@@ -5,22 +5,22 @@
 </head>
     <body>
         <h1>TIC TAC TOE</h1>
-        <input id="my-turn" type="button" value="My Turn" onclick="changePlayers();">
+        <input id="my-turn" type="button" value="My Turn" onclick="changePlayers()">
         <div id="board">
         	<div class="row one">
-        		<input class="square a1" type="button" onclick="changeThing();" value="A1">
-        		<input class="square a2" type="button" onclick="changeThing();" value="A2">
-        		<input class="square a3" type="button" onclick="changeThing();" value="A3">
+        		<input class="square a1" type="button" onclick="makeMove(this)" value="">
+        		<input class="square a2" type="button" onclick="makeMove(this)" value="">
+        		<input class="square a3" type="button" onclick="makeMove(this)" value="">
         	</div>
         	<div class="row two">
-	        	<input class="square b1" type="button" onclick="changeThing();" value="B1">
-	        	<input class="square b2" type="button" onclick="changeThing();" value="B2">
-	        	<input class="square a3" type="button" onclick="changeThing();" value="B3">
+	        	<input class="square b1" type="button" onclick="makeMove(this)" value="">
+	        	<input class="square b2" type="button" onclick="makeMove(this)" value="">
+	        	<input class="square a3" type="button" onclick="makeMove(this)" value="">
         	</div>
         	<div class="row three">
-				<input class="square c1" type="button" onclick="changeThing();" value="C1">
-				<input class="square c2" type="button" onclick="changeThing();" value="C2">
-				<input class="square c3" type="button" onclick="changeThing();" value="C3">
+				<input class="square c1" type="button" onclick="makeMove(this)" value="">
+				<input class="square c2" type="button" onclick="makeMove(this)" value="">
+				<input class="square c3" type="button" onclick="makeMove(this)" value="">
         	</div>
         </div>
         <script type="text/javascript" src="scripts.js"></script>

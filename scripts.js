@@ -1,15 +1,21 @@
-var player = 'X';
+var player = "X";
 
 function changePlayers() {
-	if (player === 'X' or player === '') {
+	if (player === "X" || player === "") {
 		player = "O";
 	} else {
 		player = "X";
 	}
-	return player;
 }
 
 function makeMove(element) {
-	var squareVal = document.this;
-	var player = changePlayers();
+	var squareVal = element.value;
+	
+	if (squareVal === "") {
+		squareVal = player;
+	} else {
+		console.log("Don't do that.");
+	}
 }
+
+console.log(player);
