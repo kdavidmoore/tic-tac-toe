@@ -1,0 +1,21 @@
+body {
+	text-align: center;
+	font-family: Arial, sans-serif;
+}
+
+h1 {
+
+}
+
+input[type="button"] {
+	background-color: #009999;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	width: 100px;
+}
+
+input[type="button"]:hover {
+	cursor: pointer;
+}
