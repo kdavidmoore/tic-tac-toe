@@ -44,6 +44,11 @@ h1 {
 	font-size: 35px;
 }
 
+.square:active {
+	border: none;
+	outline: none;
+}
+
 .a1, .b1, .c1, .a2, .b2, .c2 {
 	border-right: 3px solid black;
 }

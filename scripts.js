@@ -6,16 +6,17 @@ function changePlayers() {
 	} else {
 		player = "X";
 	}
+
+	console.log(player);
 }
 
 function makeMove(element) {
-	var squareVal = element.value;
-	
-	if (squareVal === "") {
-		squareVal = player;
+	if (element.value === "") {
+		element.value = player;
 	} else {
 		console.log("Don't do that.");
 	}
+
+	console.log(element.value);
 }
 
-console.log(player);
