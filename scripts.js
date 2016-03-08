@@ -1,4 +1,4 @@
-var player = "X";
+var player = "X"; // starts with Player 1 (Xs) 
 
 function changePlayers(element) {
 	if (player === "X" || player === "") {
@@ -24,7 +24,12 @@ function makeMove(element) {
 }
 
 function startOver() {
+	// returns to Player 1
 	player = "X";
+	var playerButton = document.getElementById('player-button');
+	playerButton.value = "Player 1";
+	
+	// clears all squares
 	var squares = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
 	var resetSquares = [];
 	for (i = 0; i < squares.length; i++) {
