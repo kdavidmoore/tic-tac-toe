@@ -54,17 +54,27 @@ input {
 	width: 100%;
 }
 
-.row.one, .row.two {
+/* .row.one, .row.two {
 	border-bottom: 5px solid black;
-}
+} */
 
 .square, .square:active {
-	width: 31%;
+	width: 32%;
 	min-height: 150px;
 	background-color: #fff;
-	font-size: 35px;
+	font-size: 80px;
 }
 
 #a1, #b1, #c1, #a2, #b2, #c2 {
 	border-right: 5px solid black;
 }
+
+#a1, #a2, #a3 {
+	border-bottom: 5px solid black;
+}
+
+#b1, #b2, #b3 {
+	border-bottom: 5px solid black;
+}
+
+
