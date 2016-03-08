@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <head>
-	<title>TIC TAC TOE</title>
+	<title>Tic Tac Toe</title>
 	<link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
     <body>
         <h1>TIC TAC TOE</h1>
-        <input id="player-button" type="button" value="Player 1" onclick="changePlayers(this)">
-        <input id="start-over" type="button" value="Start Over" onclick="startOver()">
+        <input id="start-over" class="top-button" type="button" value="Start Over" onclick="startOver()">
         <div id="board">
         	<div class="row one">
         		<input id="a1" class="square" type="button" onclick="makeMove(this)" value="">
@@ -25,6 +24,7 @@
 	        	<input id="c3" class="square" type="button" onclick="makeMove(this)" value="">
         	</div>
         </div>
+        <div id="game-header"></div>
         <script type="text/javascript" src="scripts.js"></script>
     </body>
 </html>
