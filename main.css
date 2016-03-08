@@ -4,7 +4,10 @@ body {
 }
 
 h1 {
-
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 #player-button {
@@ -14,7 +17,9 @@ h1 {
 	border: none;
 	border-radius: 5px;
 	width: 100px;
+	margin-right: 5px;
 	margin-bottom: 30px;
+	padding: 10px;
 }
 
 #start-over {
@@ -23,8 +28,10 @@ h1 {
 	font-size: 18px;
 	border: none;
 	border-radius: 5px;
-	width: 100px;
+	width: 120px;
+	margin-left: 5px;
 	margin-bottom: 30px;
+	padding: 10px;
 }
 
 #my-turn:hover {
