@@ -17,6 +17,16 @@ h1 {
 	margin-bottom: 30px;
 }
 
+#start-over {
+	background-color: #FF4500;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	width: 100px;
+	margin-bottom: 30px;
+}
+
 #my-turn:hover {
 	cursor: pointer;
 }
@@ -49,6 +59,6 @@ h1 {
 	outline: none;
 }
 
-.a1, .b1, .c1, .a2, .b2, .c2 {
+#a1, #b1, #c1, #a2, #b2, #c2 {
 	border-right: 3px solid black;
 }

@@ -23,3 +23,12 @@ function makeMove(element) {
 	console.log(element.value);
 }
 
+function startOver() {
+	player = "X";
+	var squares = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+	var resetSquares = [];
+	for (i = 0; i < squares.length; i++) {
+		resetSquares.push(document.getElementById(squares[i]));
+		resetSquares[i].value = "";
+	}
+}
