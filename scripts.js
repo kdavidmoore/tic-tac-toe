@@ -1,12 +1,21 @@
+$(window).load(function(){
+	var aOne = $('#a1');
+	var squareWidth = aOne.clientWidth;
+	var squares = $('.square');
+	squares.style.height = squareWidth + 'px';
+});
+
+$(document).ready(function(){
+
 var winners = [
-	['a1','a2','a3'],
-	['b1','b2','b3'],
-	['c1','c2','c3'],
-	['a1','b1','c1'],
-	['a2','b2','c2'],
-	['a3','b3','c3'],
-	['a1','b2','c3'],
-	['c1','b2','a3']
+['a1','a2','a3'],
+['b1','b2','b3'],
+['c1','c2','c3'],
+['a1','b1','c1'],
+['a2','b2','c2'],
+['a3','b3','c3'],
+['a1','b2','c3'],
+['c1','b2','a3']
 ];
 
 /* var whosTurn = 1 */
@@ -16,16 +25,8 @@ var computer;
 var playerMode;
 var whosTurn = 1;
 
-function chooseNumPlayers(numPlayers) {
+function enableBoard() {
 	var gameHeader = $('#game-header');
-	if (numPlayers === 1) {
-		computer = true;
-		playerMode = 1;
-	} else {
-		computer = false;
-		playerMode = 2;
-	}
-	// enable buttons
 	gameHeader.innerHTML = "player one's turn";
 	gameHeader.classList.add('player-one');
 	gameHeader.classList.remove('player-two');
@@ -37,7 +38,21 @@ function chooseNumPlayers(numPlayers) {
 	twoPlayers.disabled = true;
 }
 
-function addSymbol(element) {
+$('#one-player').click(function(){
+	var gameHeader = $('#game-header');
+	computer = true;
+	playerMode = 1;
+	enableBoard();
+});
+
+$('#two-players').click(function(){
+	computer = false;
+	playerMode = 2;
+	enableBoard();
+});
+
+$('.square').click(function() {
+	var element = $(this);
 	var gameHeader = $('#game-header');
 	if (element.innerHTML == '') {
 		//It's X's turn. So, we have an empty square, and it's X's turn. Put an X in.
@@ -71,8 +86,7 @@ function addSymbol(element) {
 		gameHeader.innerHTML = "This box is taken.";
 		gameHeader.className = 'red'; }
 	}
-}
-
+});
 
 function computersTurn() {
 	var gameHeader = $('#game-header');
@@ -147,7 +161,7 @@ function gameOver(combo) {
 	startOver.disabled = false;
 }
 
-function startOver() {
+$('#start-over').click(function() {
 	var gameHeader = $('#game-header');
 	// returns to Player 1
 	whosTurn = 1;
@@ -167,9 +181,5 @@ function startOver() {
 	var twoPlayers = $('#two-players');
 	onePlayer.disabled = false;
 	twoPlayers.disabled = false;
-}
-
-var aOne = $('#a1');
-var squareWidth = aOne.clientWidth;
-var squares = $('.square');
-squares.style.height = squareWidth + 'px';
+});
+});
