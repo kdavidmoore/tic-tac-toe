@@ -1,30 +1,45 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<title>Tic Tac Toe</title>
-	<link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="main.css">
+
+	<link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
 </head>
-    <body>
-        <h1>TIC TAC TOE</h1>
-        <input id="start-over" class="top-button" type="button" value="Start Over" onclick="startOver()">
-        <div id="board">
-        	<div class="row one">
-        		<input id="a1" class="square" type="button" onclick="makeMove(this)" value="">
-        		<input id="a2" class="square" type="button" onclick="makeMove(this)" value="">
-        		<input id="a3" class="square" type="button" onclick="makeMove(this)" value="">
-        	</div>
-	        	<div class="row two">
-	        	<input id="b1" class="square" type="button" onclick="makeMove(this)" value="">
-	        	<input id="b2" class="square" type="button" onclick="makeMove(this)" value="">
-	        	<input id="b3" class="square" type="button" onclick="makeMove(this)" value="">
-        	</div>
-        	<div class="row three">
-	        	<input id="c1" class="square" type="button" onclick="makeMove(this)" value="">
-	        	<input id="c2" class="square" type="button" onclick="makeMove(this)" value="">
-	        	<input id="c3" class="square" type="button" onclick="makeMove(this)" value="">
-        	</div>
-        </div>
-        <div id="game-header"></div>
-        <script type="text/javascript" src="scripts.js"></script>
-    </body>
+<body>
+
+	<div id="game-wrapper">
+		<div id="game-header">
+			player 1's turn
+		</div>
+		<div class="num-players">
+				<button id="one-player" onclick="chooseNumPlayers(1)">One Player</button>
+				<button id="two-players" onclick="chooseNumPlayers(2)">Two Players</button>
+		</div>
+		<div id="board-wrapper">
+			<div id="row1">
+				<button disabled class="left square empty" id="a1" onclick="addSymbol(this, 'a1')"></button>
+				<button disabled class="square empty" id="a2" onclick="addSymbol(this)"></button>
+				<button disabled class="square empty" id="a3" onclick="addSymbol(this)"></button>
+			</div>
+			<div id="row2">
+				<button disabled class="left square empty" id="b1" onclick="addSymbol(this)"></button>
+				<button disabled class="square empty" id="b2" onclick="addSymbol(this)"></button>
+				<button disabled class="square empty" id="b3" onclick="addSymbol(this)"></button>
+			</div>
+			<div id="row3">
+				<button disabled class="left square empty" id="c1" onclick="addSymbol(this)"></button>
+				<button disabled class="square empty" id="c2" onclick="addSymbol(this)"></button>
+				<button disabled class="square empty" id="c3" onclick="addSymbol(this)"></button>
+			</div>
+		</div>
+		<div id="button-wrapper">
+			<button id="start-over" onclick="startOver()">Start Over</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="scripts.js"></script>
+</body>
 </html>
