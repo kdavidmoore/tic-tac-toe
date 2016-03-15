@@ -1,105 +1,107 @@
-$(window).load(function(){
-	var aOne = $('#a1');
-	var squareWidth = aOne.clientWidth;
-	var squares = $('.square');
-	squares.style.height = squareWidth + 'px';
-});
-
-$(document).ready(function(){
-
-var winners = [
-['a1','a2','a3'],
-['b1','b2','b3'],
-['c1','c2','c3'],
-['a1','b1','c1'],
-['a2','b2','c2'],
-['a3','b3','c3'],
-['a1','b2','c3'],
-['c1','b2','a3']
-];
-
-/* var whosTurn = 1 */
 var playerOneMarkings = [];
 var playerTwoMarkings = [];
 var computer;
 var playerMode;
 var whosTurn = 1;
+var winners = [
+	['a1','a2','a3'],
+	['b1','b2','b3'],
+	['c1','c2','c3'],
+	['a1','b1','c1'],
+	['a2','b2','c2'],
+	['a3','b3','c3'],
+	['a1','b2','c3'],
+	['c1','b2','a3']
+	];
+
+$(document).ready(function(){
+	$('button').click(function() {
+		var clickedButton = $(this).attr('id');
+		var squares = $('.square');
+		if (clickedButton == 'one-player') {
+			computer = true;
+			playerMode = 1;
+			squares.html('');
+			enableBoard();
+		} else if (clickedButton == 'two-players') {
+			computer = false;
+			playerMode = 2;
+			squares.html('');
+			enableBoard();
+		} else if (clickedButton == 'start-over') {
+			var gameHeader = $('#game-header');
+			// returns to Player 1
+			whosTurn = 1;
+			gameHeader.html("player one's turn");
+			gameHeader.removeClass('player-two');
+			gameHeader.addClass('player-one');
+			// clears all squares
+			playerOneMarkings = [];
+			playerTwoMarkings = [];
+			squares.html('');
+			squares.removeClass('winner');
+			squares.removeClass('playerOneHasThisSpace');
+			squares.removeClass('playerTwoHasThisSpace');
+			squares.addClass('empty');
+			$('#one-player').prop('disabled', false);
+			$('#two-players').prop('disabled', false);
+		}
+	});
+
+	$('.square').click(function(){
+		var element = $(this);
+		var gameHeader = $('#game-header');
+		if (element.html() == '') {
+			//It's X's turn. So, we have an empty square, and it's X's turn. Put an X in.
+			if (whosTurn === 1) {
+				element.html('X');
+				element.removeClass('empty');
+				element.addClass('playerOneHasThisSpace');
+				playerOneMarkings.push(element.id);
+				whosTurn = 2;
+				gameHeader.html("player two's turn");
+				gameHeader.removeClass('player-one');
+				gameHeader.addClass('player-two');
+				checkWin();
+				if (checkWin() === true) {
+					return; }
+				if (computer) {
+				computersTurn(); }
+		} else if (whosTurn === 2) {
+			gameHeader.html("player one's turn");
+			gameHeader.removeClass('player-two');
+			gameHeader.addClass('player-one');
+			element.html('O');
+			element.removeClass('empty');
+			element.addClass('playerTwoHasThisSpace');
+			playerTwoMarkings.push(element.id);
+			whosTurn = 1;
+			checkWin();
+		} else {
+			gameHeader.html("This box is taken.");
+			gameHeader.addClass('red'); }
+		}
+	});
+});
 
 function enableBoard() {
 	var gameHeader = $('#game-header');
-	gameHeader.innerHTML = "player one's turn";
-	gameHeader.classList.add('player-one');
-	gameHeader.classList.remove('player-two');
-	var buttons = $('button');
-	buttons.disabled = false;
-	var onePlayer = $('#one-player');
-	var twoPlayers = $('#two-players');
-	onePlayer.disabled = true;
-	twoPlayers.disabled = true;
+	gameHeader.html("player one's turn");
+	gameHeader.addClass('player-one');
+	gameHeader.addClass('player-two');
+	$('button').prop('disabled', false);
 }
-
-$('#one-player').click(function(){
-	var gameHeader = $('#game-header');
-	computer = true;
-	playerMode = 1;
-	enableBoard();
-});
-
-$('#two-players').click(function(){
-	computer = false;
-	playerMode = 2;
-	enableBoard();
-});
-
-$('.square').click(function() {
-	var element = $(this);
-	var gameHeader = $('#game-header');
-	if (element.innerHTML == '') {
-		//It's X's turn. So, we have an empty square, and it's X's turn. Put an X in.
-		if (whosTurn === 1) {
-			element.innerHTML = 'X';
-			element.classList.remove('empty');
-			element.classList.add('playerOneHasThisSpace');
-			playerOneMarkings.push(element.id);
-			whosTurn = 2;
-			gameHeader.innerHTML = '';
-			gameHeader.innerHTML = "player two's turn";
-			gameHeader.classList.add('player-two');
-			gameHeader.classList.remove('player-one');
-			checkWin();
-			if (checkWin() === true) {
-				return; }
-			if (computer) {
-			computersTurn(); }
-	} else if (whosTurn === 2) {
-		gameHeader.innerHTML = '';
-		gameHeader.innerHTML = "player one's turn";
-		gameHeader.classList.add('player-one');
-		gameHeader.classList.remove('player-two');
-		element.innerHTML = 'O';
-		element.classList.remove('empty');
-		element.classList.add('playerTwoHasThisSpace');
-		playerTwoMarkings.push(element.id);
-		whosTurn = 1;
-		checkWin();
-	} else {
-		gameHeader.innerHTML = "This box is taken.";
-		gameHeader.className = 'red'; }
-	}
-});
 
 function computersTurn() {
 	var gameHeader = $('#game-header');
 	var emptySquares = $('.empty');
 	var randomEmptySquare = Math.floor(Math.random() * emptySquares.length);
-	console.log("length of array: " + emptySquares.length);
-	console.log("random empty square: " + randomEmptySquare);
 	var element = emptySquares[randomEmptySquare];
 	element.innerHTML = 'O';
-	gameHeader.innerHTML = '';
-	gameHeader.innerHTML = "player one's turn";
-	gameHeader.classList.add('player-one');
-	gameHeader.classList.remove('player-two');
+	gameHeader.html('');
+	gameHeader.html("player one's turn");
+	gameHeader.addClass('player-one');
+	gameHeader.removeClass('player-two');
 	element.classList.remove('empty');
 	element.classList.add('playerTwoHasThisSpace');
 	playerTwoMarkings.push(element.id);
@@ -139,47 +141,28 @@ function gameOver(combo) {
 		document.getElementById(combo[i]).classList.add('winner');
 	}
 	if (theWinner === "X") {
-			gameHeader.classList.remove('player-two');
-			gameHeader.classList.add('player-one');
+			gameHeader.removeClass('player-two');
+			gameHeader.addClass('player-one');
 			if (computer) {
-				gameHeader.innerHTML = "You beat the computer!";
+				gameHeader.html("You beat the computer!");
 			} else {
-				gameHeader.innerHTML = "Player one won the game!";
+				gameHeader.html("Player one won the game!");
 			}
 	} else if (theWinner === "O") {
-			gameHeader.classList.remove('player-one');
-			gameHeader.classList.add('player-two');
+			gameHeader.removeClass('player-one');
+			gameHeader.addClass('player-two');
 			if (computer) {
-				gameHeader.innerHTML = "The computer beat you!";
+				gameHeader.html("The computer beat you!");
 			} else {
-				gameHeader.innerHTML = "Player two won the game!";
+				gameHeader.html("Player two won the game!");
 			}
 	}
-	var buttons = $('button');
-	buttons.disabled = true;
-	var startOver = $('#start-over');
-	startOver.disabled = false;
+	$('button').prop('disabled', true);
+	$('#start-over').prop('disabled', false);
 }
 
-$('#start-over').click(function() {
-	var gameHeader = $('#game-header');
-	// returns to Player 1
-	whosTurn = 1;
-	gameHeader.innerHTML = "player one's turn";
-	gameHeader.classList.add('player-one');
-	gameHeader.classList.remove('player-two');
-	// clears all squares
-	playerOneMarkings = [];
-	playerTwoMarkings = [];
-	var squares = $('.square');
-	squares.innerHTML = '';
-	squares.classList.remove('winner');
-	squares.classList.remove('playerOneHasThisSpace');
-	squares.classList.remove('playerTwoHasThisSpace');
-	squares.classList.add('empty');
-	var onePlayer = $('#one-player');
-	var twoPlayers = $('#two-players');
-	onePlayer.disabled = false;
-	twoPlayers.disabled = false;
-});
-});
+var squareWidth = document.getElementById('a1').clientWidth;
+var squares = document.getElementsByClassName('square');
+for(i=0; i<squares.length; i++){
+	squares[i].style.height = squareWidth + 'px';
+}
