@@ -22,26 +22,33 @@ for (i=0; i<gridSize; i++) {
 }
 console.log(winners); */
 
+
+// make sure the squares have some height before we add Xs and Os
+var squareWidth = $('.left').width();
+var squares = $('.square');
+var squareHeight = (squareWidth*0.5) + 'px';
+squares.height(squareHeight);
+
+
 $(document).ready(function(){
-	$('.buttony').click(function() {
+	$('.choice-button').click(function() {
 		var clickedButton = $(this).attr('id');
 		var squares = $('.square');
 		if (clickedButton == 'one-player') {
+			whosTurn = 1;
 			computer = true;
 			squares.html('');
 			enableBoard();
 		} else if (clickedButton == 'two-players') {
+			whosTurn = 1;
 			computer = false;
 			squares.html('');
 			enableBoard();
-		} else if (clickedButton == 'start-over') {
+		} else if (clickedButton == 'new-game') {
+			// reset game-header
 			var gameHeader = $('#game-header');
-			// returns to Player 1
-			whosTurn = 1;
-			gameHeader.html("player one's turn");
-			gameHeader.removeClass('player-two');
-			gameHeader.addClass('player-one');
-			// clears all squares
+			gameHeader.html("How many players?");
+			// clear all squares
 			playerOneMarkings = [];
 			playerTwoMarkings = [];
 			squares.html('');
@@ -49,6 +56,7 @@ $(document).ready(function(){
 			squares.removeClass('playerOneHasThisSpace');
 			squares.removeClass('playerTwoHasThisSpace');
 			squares.addClass('empty');
+			$('button').prop('disabled', true);
 			$('#one-player').prop('disabled', false);
 			$('#two-players').prop('disabled', false);
 		}
@@ -66,8 +74,6 @@ $(document).ready(function(){
 				element.removeClass('empty');
 				element.addClass('playerOneHasThisSpace');
 				gameHeader.html("player two's turn");
-				gameHeader.removeClass('player-one');
-				gameHeader.addClass('player-two');
 				playerOneMarkings.push(elementID);
 				console.log(playerOneMarkings);
 				checkWin();
@@ -78,8 +84,6 @@ $(document).ready(function(){
 				computersTurn(); }
 		} else if (whosTurn === 2) {
 			gameHeader.html("player one's turn");
-			gameHeader.removeClass('player-two');
-			gameHeader.addClass('player-one');
 			element.html('O');
 			element.addClass('blink');
 			element.removeClass('empty');
@@ -88,8 +92,8 @@ $(document).ready(function(){
 			checkWin();
 			whosTurn = 1;
 		} else {
-			gameHeader.html("This box is taken.");
-			gameHeader.addClass('red'); }
+			gameHeader.html("This box is taken."); 
+			}
 		}
 	});
 });
@@ -97,8 +101,6 @@ $(document).ready(function(){
 function enableBoard() {
 	var gameHeader = $('#game-header');
 	gameHeader.html("player one's turn");
-	gameHeader.addClass('player-one');
-	gameHeader.removeClass('player-two');
 	$('button').prop('disabled', false);
 }
 
@@ -112,8 +114,6 @@ function computersTurn() {
 	element.classList.add('blink');
 	gameHeader.html('');
 	gameHeader.html("player one's turn");
-	gameHeader.addClass('player-one');
-	gameHeader.removeClass('player-two');
 	element.classList.remove('empty');
 	element.classList.add('playerTwoHasThisSpace');
 	playerTwoMarkings.push(elementID);
@@ -172,10 +172,5 @@ function gameOver(combo) {
 			}
 	}
 	$('button').prop('disabled', true);
-	$('#start-over').prop('disabled', false);
+	$('#new-game').prop('disabled', false);
 }
-
-var squareWidth = $('.left').width();
-var squares = $('.square');
-squares.height((squareWidth*0.5) + 'px');
-console.log(squares.height(squareWidth + 'px'));

@@ -11,22 +11,37 @@ button:hover {
 	padding: 30px;
 }
 
-.button-wrapper.top {
+#game-header{
+	font-size: 30px;
+	font-weight: bold;
+	color: black;
+	width: 60%;
+	text-align: center;
+	margin: 0 auto 25px;
+	padding: 10px;
+}
+
+.button-wrapper {
 	margin: auto;
 	width: 60%;
 	text-align: center;
 	margin-bottom: 20px;
 }
 
-.buttony.top {
-	width: 120px;
+.choice-button {
+	width: 130px;
 	padding: 0px 5px;
-	background-color: #ddd;
-	font-size: 18px;
-	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 10px;
+	background-color: #dedede;
 	border: none;
 	outline: none;
 	padding: 5px;
+}
+
+.choice-button:active {
+	box-shadow: inset 2px 2px 5px 0px rgba(0,0,0,0.5);
 }
 
 #board-wrapper{
@@ -66,55 +81,9 @@ button:hover {
 
 .left{
 	margin-left: 0px;
-}	
-
-#game-header{
-	font-size: 30px;
-	font-weight: bold;
-	background-color: #009999;
-	color: white;
-	border-radius: 10px;
-	width: 60%;
-	text-align: center;
-	margin: 0 auto 25px;
-	padding: 10px;
-}
-
-#game-header.red{
-	background-color: #cc0000;
-}
-
-#game-header.player-one{
-	background-color: #009999;
-}
-
-#game-header.player-two{
-	background-color: #3333cc;
 }
 
 .winner {
 	background-color: #dedede;
-}
-
-.button-wrapper.bottom {
-	text-align: center;
-	width: 100%;
-	margin: auto;
-	padding: 20px 0 0;
-}
-
-.buttony.bottom {
-	font-weight: bold;
-	background-color: #FF4500;
-	width: 130px;
-	color: #fff;
-	font-size: 20px;
-	border: none;
-	border-radius: 10px;
-	outline: none;
-	padding: 10px;
-}
-
-.buttony:active {
-	box-shadow: inset 2px 2px 5px 0px rgba(0,0,0,0.5);
+	color: red;
 }
