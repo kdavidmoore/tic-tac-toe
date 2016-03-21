@@ -1,28 +1,43 @@
 <!DOCTYPE html>
+<html>
 <head>
-	<title>TIC TAC TOE</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-    <body>
-        <h1>TIC TAC TOE</h1>
-        <input id="my-turn" type="button" value="My Turn" onclick="changePlayers();">
-        <div id="board">
-        	<div class="row one">
-        		<input class="square a1" type="button" onclick="changeThing();" value="A1">
-        		<input class="square a2" type="button" onclick="changeThing();" value="A2">
-        		<input class="square a3" type="button" onclick="changeThing();" value="A3">
-        	</div>
-        	<div class="row two">
-	        	<input class="square b1" type="button" onclick="changeThing();" value="B1">
-	        	<input class="square b2" type="button" onclick="changeThing();" value="B2">
-	        	<input class="square a3" type="button" onclick="changeThing();" value="B3">
-        	</div>
-        	<div class="row three">
-				<input class="square c1" type="button" onclick="changeThing();" value="C1">
-				<input class="square c2" type="button" onclick="changeThing();" value="C2">
-				<input class="square c3" type="button" onclick="changeThing();" value="C3">
-        	</div>
-        </div>
-        <script type="text/javascript" src="scripts.js"></script>
-    </body>
+<body>
+
+	<div id="game-wrapper">
+		<div id="game-header" class="player-one">
+			How many players?
+		</div>
+		<div class="button-wrapper top">
+				<button class="buttony top" id="one-player">One Player</button>
+				<button class="buttony top" id="two-players">Two Players</button>
+		</div>
+		<div id="board-wrapper">
+			<div id="row1">
+				<button disabled class="left square empty" id="a1"></button>
+				<button disabled class="square empty" id="a2"></button>
+				<button disabled class="square empty" id="a3"></button>
+			</div>
+			<div id="row2">
+				<button disabled class="left square empty" id="b1"></button>
+				<button disabled class="square empty" id="b2"></button>
+				<button disabled class="square empty" id="b3"></button>
+			</div>
+			<div id="row3">
+				<button disabled class="left square empty" id="c1"></button>
+				<button disabled class="square empty" id="c2"></button>
+				<button disabled class="square empty" id="c3"></button>
+			</div>
+		</div>
+		<div class="button-wrapper bottom">
+			<button class="buttony bottom" id="start-over">Start Over</button>
+		</div>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
+</body>
 </html>
