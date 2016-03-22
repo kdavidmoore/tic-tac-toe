@@ -2,7 +2,7 @@
 
 ## Class project modified to include jQuery
 
-This page presents a tic-tac-toe game written in HTML, CSS, native JS, and jQuery. The user is given a choice of single-player or two-player mode. In single player mode, the user plays against an algorithm that randomly chooses empty squares.
+This page presents a tic-tac-toe game written in HTML, CSS, native JS, and jQuery. The user is given a choice of a 3x3, 4x4, or 5x5 grid; and single-player or two-player mode. In single player mode, the user plays against an algorithm that randomly chooses empty squares.
 
 ##Demo here
 

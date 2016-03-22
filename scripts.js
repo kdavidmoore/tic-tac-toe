@@ -2,7 +2,9 @@ var playerOneMarkings = [];
 var playerTwoMarkings = [];
 var computer;
 var whosTurn = 1;
-var winners = [
+var rowSize;
+var winners = [];
+/* var winners = [
 	['a1','a2','a3'],
 	['b1','b2','b3'],
 	['c1','c2','c3'],
@@ -11,32 +13,29 @@ var winners = [
 	['a3','b3','c3'],
 	['a1','b2','c3'],
 	['c1','b2','a3']
-	];
-
-/* var winners = [];
-var gridSize = 5;
-for (i=0; i<gridSize; i++) {
-	for (j=0; j<gridSize; i++) {
-		winners[i].push('a' + j);
-	}
-}
-console.log(winners); */
-
-
-// make sure the squares have some height before we add Xs and Os
-var squareWidth = $('.left').width();
-var squares = $('.square');
-var squareHeight = (squareWidth*0.5) + 'px';
-squares.height(squareHeight);
-
+	]; */
 
 $(document).ready(function(){
 	$('.choice-button').click(function() {
 		var clickedButton = $(this).attr('id');
 		var squares = $('.square');
-		if (clickedButton == 'one-player') {
+		if (clickedButton == 'nine') {
+			// draw a 3 x 3 grid
+			rowSize = 3;
+			makeWinnersArray();
+		} else if (clickedButton == 'sixteen') {
+			// draw a 4 x 4 grid
+			rowSize = 4;
+			makeWinnersArray();
+		} else if (clickedButton == 'twenty-five') {
+			// draw a 5 x 5 grid
+			rowSize = 5;
+			makeWinnersArray();
+		} else if (clickedButton == 'one-player') {
 			whosTurn = 1;
 			computer = true;
+			console.log(whosTurn);
+			console.log(computer);
 			squares.html('');
 			enableBoard();
 		} else if (clickedButton == 'two-players') {
@@ -59,15 +58,17 @@ $(document).ready(function(){
 			$('button').prop('disabled', true);
 			$('#one-player').prop('disabled', false);
 			$('#two-players').prop('disabled', false);
+			$('#new-game').prop('disabled', false);
 		}
 	});
 
-	$('.square').click(function(){
+	// this square-click event listener is broken...doesn't even get to the if statements
+	$('.square').click(function() {
 		var element = $(this);
 		var elementID = element.attr('id');
+		console.log('You clicked on the square, ' + elementID);
 		var gameHeader = $('#game-header');
-		if (element.html() == '') {
-			//It's X's turn. So, we have an empty square, and it's X's turn. Put an X in.
+		if (element.hasClass('empty')) {
 			if (whosTurn === 1) {
 				element.html('X');
 				element.addClass('blink');
@@ -75,7 +76,6 @@ $(document).ready(function(){
 				element.addClass('playerOneHasThisSpace');
 				gameHeader.html("player two's turn");
 				playerOneMarkings.push(elementID);
-				console.log(playerOneMarkings);
 				checkWin();
 				whosTurn = 2;
 				if (checkWin() === true) {
@@ -98,10 +98,57 @@ $(document).ready(function(){
 	});
 });
 
+function makeWinnersArray() {
+	for (i=0; i<rowSize; i++) {
+		winners[i] = [];
+		for (j=0; j<rowSize; j++) {
+			winners[i].push(i + ' ' + j);
+		}
+	}
+	drawGrid();
+	nextChoices();
+}
+
+function drawGrid(){
+	if (rowSize === 3) {
+		$('#board-wrapper').html("<div class='row' id='row1'><button disabled class='left square empty' id='a1'></button><button disabled class='square empty' id='a2'></button><button disabled class='square empty' id='a3'></button></div><div class='row' id='row2'><button disabled class='left square empty' id='b1'></button><button disabled class='square empty' id='b2'></button><button disabled class='square empty' id='b3'></button></div><div id='row3'><button disabled class='left square empty' id='c1'></button><button disabled class='square empty' id='c2'></button><button disabled class='square empty' id='c3'></button></div>");
+		$('.square').width('30%');
+		$('#row3').addClass('last-row');
+	} else if (rowSize === 4) {
+		$('#board-wrapper').html("<div class='row' id='row1'><button disabled class='left square empty' id='a1'></button><button disabled class='square empty' id='a2'></button><button disabled class='square empty' id='a3'></button><button disabled class='square empty' id='a4'></button></div><div class='row' id='row2'><button disabled class='left square empty' id='b1'></button><button disabled class='square empty' id='b2'></button><button disabled class='square empty' id='b3'></button><button disabled class='square empty' id='b4'></button></div><div class='row' id='row3'><button disabled class='left square empty' id='c1'></button><button disabled class='square empty' id='c2'></button><button disabled class='square empty' id='c3'></button><button disabled class='square empty' id='c4'></button></div><div id='row4'><button disabled class='left square empty' id='d1'></button><button disabled class='square empty' id='d2'></button><button disabled class='square empty' id='d3'></button><button disabled class='square empty' id='d4'></button></div>");
+		$('.square').width('21.22%');
+		$('#row4').addClass('last-row');
+		$('#a4').addClass('right-side');
+		$('#b4').addClass('right-side');
+		$('#c4').addClass('right-side');
+		$('#d4').addClass('right-side');
+	} else if (rowSize === 5) {
+		$('#board-wrapper').html("<div class='row' id='row1'><button disabled class='left square empty' id='a1'></button><button disabled class='square empty' id='a2'></button><button disabled class='square empty' id='a3'></button><button disabled class='square empty' id='a4'></button><button disabled class='square empty' id='a5'></button></div><div class='row' id='row2'><button disabled class='left square empty' id='b1'></button><button disabled class='square empty' id='b2'></button><button disabled class='square empty' id='b3'></button><button disabled class='square empty' id='b4'></button><button disabled class='square empty' id='b5'></button></div><div class='row' id='row3'><button disabled class='left square empty' id='c1'></button><button disabled class='square empty' id='c2'></button><button disabled class='square empty' id='c3'></button><button disabled class='square empty' id='c4'></button><button disabled class='square empty' id='c5'></button></div><div class='row' id='row4'><button disabled class='left square empty' id='d1'></button><button disabled class='square empty' id='d2'></button><button disabled class='square empty' id='d3'></button><button disabled class='square empty' id='d4'></button><button disabled class='square empty' id='d5'></button></div><div id='row5'><button disabled class='left square empty' id='e1'></button><button disabled class='square empty' id='e2'></button><button disabled class='square empty' id='e3'></button><button disabled class='square empty' id='e4'></button><button disabled class='square empty' id='e5'></button></div>");	
+		$('.square').width('16%');
+		$('#row5').addClass('last-row');
+		$('#a5').addClass('right-side');
+		$('#b5').addClass('right-side');
+		$('#c5').addClass('right-side');
+		$('#d5').addClass('right-side');
+		$('#e5').addClass('right-side');
+	}
+	setSquareHeight();
+}
+
+function nextChoices() {
+	$('#nine').addClass('hidden');
+	$('#sixteen').addClass('hidden');
+	$('#twenty-five').addClass('hidden');
+	$('#one-player').removeClass('hidden');
+	$('#two-players').removeClass('hidden');
+	$('#new-game').removeClass('hidden');
+	$('#game-header').html("How many players?");
+}
+
 function enableBoard() {
-	var gameHeader = $('#game-header');
-	gameHeader.html("player one's turn");
-	$('button').prop('disabled', false);
+	$('#game-header').html("player one's turn");
+	$('.square').prop('disabled', false);
+	console.log("Squares successfully enabled.");
 }
 
 function computersTurn() {
@@ -139,9 +186,9 @@ function checkWin() {
 			} else if (playerTwoMarkings.indexOf(thisWinCombination[j]) > -1) {
 				playerTwoRowCount++;
 			}
-		if (playerOneRowCount === 3 || playerTwoRowCount === 3) {
+		if (playerOneRowCount === rowSize || playerTwoRowCount === rowSize) {
 			gameOver(thisWinCombination);
-			return true; // we need to break out of the outer for-loop when one of the row count variables gets to 3, otherwise the counter will reset
+			return true; // need to break out of the outer for-loop when one of the row count variables gets to 3, otherwise the counter will reset
 			} 
 		}
 	}
@@ -173,4 +220,11 @@ function gameOver(combo) {
 	}
 	$('button').prop('disabled', true);
 	$('#new-game').prop('disabled', false);
+}
+
+function setSquareHeight() {
+	var squareWidth = $('.left').width();
+	var squares = $('.square');
+	var squareHeight = (squareWidth*0.5) + 'px';
+	squares.height(squareHeight);
 }
