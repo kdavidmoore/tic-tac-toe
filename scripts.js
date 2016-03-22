@@ -32,21 +32,14 @@ $(document).ready(function(){
 			rowSize = 5;
 			makeWinnersArray();
 		} else if (clickedButton == 'one-player') {
-			whosTurn = 1;
 			computer = true;
-			console.log(whosTurn);
-			console.log(computer);
-			squares.html('');
 			enableBoard();
 		} else if (clickedButton == 'two-players') {
-			whosTurn = 1;
 			computer = false;
-			squares.html('');
 			enableBoard();
 		} else if (clickedButton == 'new-game') {
 			// reset game-header
-			var gameHeader = $('#game-header');
-			gameHeader.html("How many players?");
+			$('#game-header').html("How many players?");
 			// clear all squares
 			playerOneMarkings = [];
 			playerTwoMarkings = [];
@@ -55,7 +48,8 @@ $(document).ready(function(){
 			squares.removeClass('playerOneHasThisSpace');
 			squares.removeClass('playerTwoHasThisSpace');
 			squares.addClass('empty');
-			$('button').prop('disabled', true);
+			// disable the board and enable the game menu
+			squares.prop('disabled', true);
 			$('#one-player').prop('disabled', false);
 			$('#two-players').prop('disabled', false);
 			$('#new-game').prop('disabled', false);
@@ -146,21 +140,20 @@ function nextChoices() {
 }
 
 function enableBoard() {
-	$('#game-header').html("player one's turn");
+	whosTurn = 1;
 	$('.square').prop('disabled', false);
+	$('#game-header').html("player one's turn");
 	console.log("Squares successfully enabled.");
 }
 
 function computersTurn() {
-	var gameHeader = $('#game-header');
 	var emptySquares = $('.empty');
 	var randomEmptySquare = Math.floor(Math.random() * emptySquares.length);
 	var element = emptySquares[randomEmptySquare];
 	var elementID = element.getAttribute('id');
 	element.innerHTML = 'O';
 	element.classList.add('blink');
-	gameHeader.html('');
-	gameHeader.html("player one's turn");
+	$('#game-header').html("player one's turn");
 	element.classList.remove('empty');
 	element.classList.add('playerTwoHasThisSpace');
 	playerTwoMarkings.push(elementID);
