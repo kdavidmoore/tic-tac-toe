@@ -3,6 +3,7 @@ var playerTwoMarkings = [];
 var computer;
 var whosTurn = 1;
 var rowSize;
+var letters = ['a', 'b', 'c', 'd', 'e'];
 var winners = [];
 /* var winners = [
 	['a1','a2','a3'],
@@ -58,47 +59,20 @@ $(document).ready(function(){
 
 	// this square-click event listener is broken...doesn't even get to the if statements
 	$('.square').click(function() {
-		var element = $(this);
-		var elementID = element.attr('id');
-		console.log('You clicked on the square, ' + elementID);
-		var gameHeader = $('#game-header');
-		if (element.hasClass('empty')) {
-			if (whosTurn === 1) {
-				element.html('X');
-				element.addClass('blink');
-				element.removeClass('empty');
-				element.addClass('playerOneHasThisSpace');
-				gameHeader.html("player two's turn");
-				playerOneMarkings.push(elementID);
-				checkWin();
-				whosTurn = 2;
-				if (checkWin() === true) {
-					return; }
-				if (computer) {
-				computersTurn(); }
-		} else if (whosTurn === 2) {
-			gameHeader.html("player one's turn");
-			element.html('O');
-			element.addClass('blink');
-			element.removeClass('empty');
-			element.addClass('playerTwoHasThisSpace');
-			playerTwoMarkings.push(elementID);
-			checkWin();
-			whosTurn = 1;
-		} else {
-			gameHeader.html("This box is taken."); 
-			}
-		}
+		addSquare($(this));
 	});
 });
 
 function makeWinnersArray() {
+	var winnersInside;
 	for (i=0; i<rowSize; i++) {
-		winners[i] = [];
-		for (j=0; j<rowSize; j++) {
-			winners[i].push(i + ' ' + j);
+		winnersInside = [];
+		for (j=1; j<=rowSize; j++) {
+			winnersInside.push(letters[i] + j);
 		}
+		winners.push(winnersInside);
 	}
+	console.log(winners);
 	drawGrid();
 	nextChoices();
 }
@@ -141,9 +115,42 @@ function nextChoices() {
 
 function enableBoard() {
 	whosTurn = 1;
-	$('.square').prop('disabled', false);
+	$('.square').removeAttr('disabled');
 	$('#game-header').html("player one's turn");
 	console.log("Squares successfully enabled.");
+}
+
+function addSquare(element) {
+	console.log('hello?');
+	var elementID = $(element).attr('id');
+	console.log('You clicked on the square, ' + elementID);
+	if ($(element).html() == '') {
+		if (whosTurn === 1) {
+			$(element).html('X');
+			$(element).addClass('blink');
+			$(element).removeClass('empty');
+			$(element).addClass('playerOneHasThisSpace');
+			$('#game-header').html("player two's turn");
+			playerOneMarkings.push(elementID);
+			checkWin();
+			whosTurn = 2;
+			if (checkWin() === true) {
+				return; }
+			if (computer) {
+			computersTurn(); }
+	} else if (whosTurn === 2) {
+		$('#game-header').html("player one's turn");
+		$(element).html('O');
+		$(element).addClass('blink');
+		$(element).removeClass('empty');
+		$(element).addClass('playerTwoHasThisSpace');
+		playerTwoMarkings.push(elementID);
+		checkWin();
+		whosTurn = 1;
+	} else {
+		$('#game-header').html("This box is taken."); 
+		}
+	}
 }
 
 function computersTurn() {
@@ -212,7 +219,7 @@ function gameOver(combo) {
 			}
 	}
 	$('button').prop('disabled', true);
-	$('#new-game').prop('disabled', false);
+	$('#new-game').removeAttr('disabled');
 }
 
 function setSquareHeight() {
@@ -220,4 +227,7 @@ function setSquareHeight() {
 	var squares = $('.square');
 	var squareHeight = (squareWidth*0.5) + 'px';
 	squares.height(squareHeight);
+	/* $('.square').each(function(){
+		$(this).css('height: ' + squareWidth + 'px');
+	}); */
 }
