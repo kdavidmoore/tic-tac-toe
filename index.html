@@ -3,41 +3,33 @@
 <head>
 	<title>Tic Tac Toe</title>
 	<link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+	<link rel="stylesheet" type="text/css" href="dropdown.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 	<div id="game-wrapper">
-		<div id="game-header" class="player-one">
-			How many players?
+		<div id="game-header">
+			Choose a grid size:
 		</div>
-		<div class="button-wrapper top">
-				<button class="buttony top" id="one-player">One Player</button>
-				<button class="buttony top" id="two-players">Two Players</button>
+		<div id="button-wrapper">
+			<ul class="dropdown">
+	        	<li><a href="#">Grid Sizes</a>
+	        		<ul class="sub_menu">
+	        			 <li><a class="grid-size" id="three" href="#">3 x 3</a></li>
+	        			 <li><a class="grid-size" id="four" href="#">4 x 4</a></li>
+	        			 <li><a class="grid-size" id="five" href="#">5 x 5</a></li>
+	        		</ul>
+	        	</li>
+	        </ul>
 		</div>
 		<div id="board-wrapper">
-			<div id="row1">
-				<button disabled class="left square empty" id="a1"></button>
-				<button disabled class="square empty" id="a2"></button>
-				<button disabled class="square empty" id="a3"></button>
-			</div>
-			<div id="row2">
-				<button disabled class="left square empty" id="b1"></button>
-				<button disabled class="square empty" id="b2"></button>
-				<button disabled class="square empty" id="b3"></button>
-			</div>
-			<div id="row3">
-				<button disabled class="left square empty" id="c1"></button>
-				<button disabled class="square empty" id="c2"></button>
-				<button disabled class="square empty" id="c3"></button>
-			</div>
-		</div>
-		<div class="button-wrapper bottom">
-			<button class="buttony bottom" id="start-over">Start Over</button>
+			<!-- ttt grid goes here -->
 		</div>
 	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.dropdownPlain.js"></script>
 <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>
