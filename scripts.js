@@ -36,22 +36,15 @@ $(document).ready(function(){
 			computer = false;
 			enableBoard();
 		} else if (clickedButton == 'new-game') {
-			// reset game-header
-			$('#game-header').html("How many players?");
-			// clear all squares
+			// reloading the window is the simplest way, unless one wants to add a scoreboard
+			window.location.reload();
+			/* winners = [];
 			playerOneMarkings = [];
 			playerTwoMarkings = [];
-			squares.html('');
-			squares.removeClass('winner');
-			squares.removeClass('playerOneHasThisSpace');
-			squares.removeClass('playerTwoHasThisSpace');
-			squares.addClass('empty');
-			// disable the board and enable the game menu
-			squares.prop('disabled', true);
-			$('#one-player').prop('disabled', false);
-			$('#two-players').prop('disabled', false);
-			$('#new-game').prop('disabled', false);
-			$('#button-wrapper').html('<ul class="dropdown"><li><a href="#">Grid Sizes</a><ul class="sub_menu"><li><a class="grid-size" id="three" href="#">3 x 3</a></li><li><a class="grid-size" id="four" href="#">4 x 4</a></li><li><a class="grid-size" id="five" href="#">5 x 5</a></li></ul></li></ul>');
+			$('#game-header').html("Choose a grid size:");
+			$('#board-wrapper').html('');
+			$('#button-wrapper').html('<ul class="dropdown"><li><a>Grid Sizes</a><ul class="sub_menu"><li><a class="grid-size" id="three">3 x 3</a></li><li><a class="grid-size" id="four">4 x 4</a></li><li><a class="grid-size" id="five">5 x 5</a></li></ul></li></ul>');
+			*/
 		}
 	});
 
@@ -62,6 +55,7 @@ $(document).ready(function(){
 
 	function makeWinnersArray() {
 		var winnersInside;
+		// this loop adds horizontal win combos
 		for (i=0; i<rowSize; i++) {
 			winnersInside = [];
 			for (j=1; j<=rowSize; j++) {
@@ -70,6 +64,32 @@ $(document).ready(function(){
 			winners.push(winnersInside);
 		}
 		console.log(winners);
+		// this loop adds vertical win combos
+		for (i=0; i<rowSize; i++) {
+			winnersInside = [];
+			for (j=0; j<rowSize; j++) {
+				winnersInside.push(letters[j] + (i+1));
+			}
+			winners.push(winnersInside);
+		}
+		console.log(winners);
+		// this loop adds diagonal win combo no. 1
+		var k = 1;
+		winnersInside = [];
+		for (i=0; i<rowSize; i++) {
+	    	winnersInside.push(letters[i] + k);
+	    	k++;
+		}
+		winners.push(winnersInside);
+		// this loop adds diagonal win combo no. 2
+		k = rowSize;
+		winnersInside = [];
+		for (i=0; i<rowSize; i++) {
+	    	winnersInside.push(letters[i] + k);
+	    	k--;
+		}
+		winners.push(winnersInside);
+		// now draw the grid and choose number of players
 		drawGrid();
 		nextChoices();
 	}
@@ -109,11 +129,9 @@ $(document).ready(function(){
 		whosTurn = 1;
 		$('.square').removeAttr('disabled');
 		$('#game-header').html("player one's turn");
-		console.log("Squares successfully enabled.");
 	}
 
 	function addSquare(element) {
-		console.log('hello?');
 		var elementID = $(element).attr('id');
 		console.log('You clicked on the square, ' + elementID);
 		if ($(element).html() == '') {
@@ -161,7 +179,6 @@ $(document).ready(function(){
 	}
 
 	function checkWin() {
-		// if rowCount gets to 3, then we have a winner
 		var playerOneRowCount = 0;
 		var playerTwoRowCount = 0;
 		var thisWinCombination = [];
@@ -174,7 +191,7 @@ $(document).ready(function(){
 			for (j=0; j<thisWinCombination.length; j++) {
 				if(playerOneMarkings.indexOf(thisWinCombination[j]) > -1) {
 					playerOneRowCount++; // if the the index is not -1, then it's in there
-					console.log(playerOneRowCount);
+					console.log(thisWinCombination);
 				} else if (playerTwoMarkings.indexOf(thisWinCombination[j]) > -1) {
 					playerTwoRowCount++;
 				}
