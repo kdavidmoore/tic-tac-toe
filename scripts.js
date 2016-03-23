@@ -7,7 +7,8 @@ var letters = ['a', 'b', 'c', 'd', 'e'];
 var winners = [];
 
 $(document).ready(function(){
-	$('.grid-size').click(function(){
+	$('.dropdown').on("click", "a", function(event){
+		event.preventDefault();
 		var selectedSize = $(this).attr('id');
 		if (selectedSize == 'three') {
 			// draw a 3 x 3 grid
@@ -24,7 +25,8 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.choice-button').click(function() {
+	$('#button-wrapper').on("click", "button", function(event) {
+		event.preventDefault();
 		var clickedButton = $(this).attr('id');
 		var squares = $('.square');
 		if (clickedButton == 'one-player') {
@@ -53,8 +55,8 @@ $(document).ready(function(){
 		}
 	});
 
-	// this square-click event listener is broken...doesn't even get to the if statements
-	$('.square').click(function() {
+	$('#board-wrapper').on("click", "button", function(event) {
+		event.preventDefault();
 		addSquare($(this));
 	});
 
