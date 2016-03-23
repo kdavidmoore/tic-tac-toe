@@ -1,5 +1,5 @@
 body {
-	font-family: sans-serif;
+	font-family: Helvetica, sans-serif;
 }
 
 button:hover {
@@ -90,12 +90,4 @@ button:hover {
 .winner {
 	background-color: #dedede;
 	color: red;
-}
-
-.hidden {
-	display: none;
-}
-
-.unhidden {
-	display: inline-block;
 }
